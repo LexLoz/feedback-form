@@ -7,17 +7,21 @@
     left: 0
     background: rgba(0,0,0,0.5)
     z-index: 1050
-    opacity: 0
+    opacity: 1
     -webkit-transition: opacity 200ms ease-in
     -moz-transition: opacity 200ms ease-in
     transition: opacity 200ms ease-in
     pointer-events: none
     margin: 0
     padding: 0
+    transform: scaleX(0%)
+    transform: scaleY(0%)
     &:target
-        opacity: 1 //делаем окно видимым
         pointer-events: auto //элемент видим для событий мыши
         overflow-y: auto //добавляем прокрутку по y, когда элемент не помещается на страницу
+        animation-name: window-appearance //добавляем анимацию появления
+        animation-duration: 1s
+        animation-fill-mode: forwards
 
 /* ширина модального окна и его отступы от экрана */
 .modal-dialog
@@ -115,12 +119,18 @@
     overflow: auto
 
 #sell-your-soul-button
+    display: block
     cursor: pointer
+    padding: 5px
     img
         width: 50px
+        animation-name: rotation
+        animation-duration: 20s
+        animation-iteration-count: infinite
 
 .disable-scroll
     overflow: hidden
+    padding-right: 17px
 
 @keyframes burning-text
     0%
@@ -129,3 +139,17 @@
         color: orange
     100%
         color: red
+
+@keyframes rotation
+    from
+        transform: rotate(0deg)
+    to
+        transform: rotate(360deg)
+
+@keyframes window-appearance
+    0%
+        transform: scaleX(0%)
+        transform: scaleY(0%)
+    100%
+        transform: scaleX(100%)
+        transform: scaleY(100%)

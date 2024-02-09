@@ -12,7 +12,6 @@ const PhoneMask = (selector) => {
                 phone = e.target.value.replace(/[\s#-)(]/g, '');
 
             if (phone.includes(code)) {
-                console.log(phone, code);
                 matrix = item.code;
             }
         });
