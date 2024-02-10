@@ -14,10 +14,12 @@ This option is not ideal, as it does not allow you to debug the server part.
 3. See previous variant
 4. Open two terminals 
 5. In first terminal enter `npm run express`
-6. In second terminal enter `npm run dev`. 
+6. In second terminal enter `npm run dev`.
+7. 
 Now we have two servers: for the client part and for requests.
 
 P.S.
+
 I have no idea why I didn't think of using two terminals sooner lol
 
 
