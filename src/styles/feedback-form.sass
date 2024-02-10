@@ -1,4 +1,7 @@
+/* импортируем цвета */
 @import "./colors.sass"
+/* импортируем миксины*/
+@import "./mixins"
 
 *
     margin: 0
@@ -102,10 +105,14 @@ body
 .incorrect-value
     color: red
     font-size: 11px
-    visibility: collapse
+    visibility: hidden
+    opacity: 0
 
     &--show
+        opacity: 1
         visibility: inherit
+        @include soft-transition
+        
 
 @media (min-width: 800px)
     .content

@@ -5,6 +5,7 @@ https://github.com/liggth/inputmask-phones
 import maskList from "./masks_list";
 const PhoneMask = (selector) => {
     function setMask(e) {
+        e.preventDefault();
         let matrix = '+###############';
 
         maskList.forEach(item => {
@@ -27,11 +28,11 @@ const PhoneMask = (selector) => {
     let inputs = document.querySelectorAll(selector);
 
     inputs.forEach(input => {
-        if (!input.value) input.value = '+';
+        if (!input.value || input.value.length == 0) input.value = '+';
         input.addEventListener('input', setMask);
         input.addEventListener('focus', setMask);
         input.addEventListener('blur', setMask);
     });
 };
 
-export default PhoneMask;
+PhoneMask('#phone-field');

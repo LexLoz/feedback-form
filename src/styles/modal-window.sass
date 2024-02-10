@@ -1,3 +1,5 @@
+/* импортируем миксины*/
+@import "./mixins"
 /* свойства модального окна по умолчанию */
 .modal
     position: fixed
@@ -8,9 +10,7 @@
     background: rgba(0,0,0,0.5)
     z-index: 1050
     opacity: 1
-    -webkit-transition: opacity 200ms ease-in
-    -moz-transition: opacity 200ms ease-in
-    transition: opacity 200ms ease-in
+    @include soft-transition
     pointer-events: none
     margin: 0
     padding: 0

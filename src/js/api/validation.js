@@ -18,7 +18,6 @@ const generateErrorLabel = (fieldId) => {
 }
 
 const fieldNotValide = (fieldId, returnObj) => {
-    if (fieldId === "button") generateErrorLabel(fieldId);
     const errorLabel = _d.querySelector(`#${fieldId}--incorrect`);
     const className = `${errClassName}--show`;
     const hasError = errorLabel.classList.contains(className);
@@ -38,25 +37,32 @@ const toggleValidationError = (fieldId, action = 'SHOW') => {
         errorLabel.classList.add(className);
 }
 
-inputBoxes.forEach(element => {
-    generateErrorLabel(element.id);
+(function () {
+    generateErrorLabel('button');
+    inputBoxes.forEach(element => {
+        generateErrorLabel(element.id);
 
-    element.addEventListener('input', (e) => {
-        switch (element.id) {
-            case "name-field":
-                break;
-            case "email-field":
-                const reg = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
-                if (!reg.test(e.target.value)) toggleValidationError(element.id, "SHOW");
-                else toggleValidationError(element.id, "HIDE");
-                break;
-            case "phone-field":
-                break;
-            case "text-field":
-                break;
-        }
+        element.addEventListener('input', (e) => {
+            switch (element.id) {
+                case "name-field":
+                    break;
+                case "email-field":
+                    if (e.target.value.length == 0) {
+                        toggleValidationError(element.id, "HIDE");
+                        break;
+                    }
+                    const reg = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+                    if (!reg.test(e.target.value)) toggleValidationError(element.id, "SHOW");
+                    else toggleValidationError(element.id, "HIDE");
+                    break;
+                case "phone-field":
+                    break;
+                case "text-field":
+                    break;
+            }
+        })
     })
-})
+}())
 
 export function IsAllFieldsFilled() {
     let succsess = true;
