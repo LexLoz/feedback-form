@@ -22,7 +22,7 @@ app.post("/api/registration", (req, res) => {
           // console.log(data);
           const cash = {};
           for (let i = 0; i <= 3; i++) {
-            if (Math.random() <= 0 + 0.2 * i) {
+            if (Math.random() <= 1 - 0.2 * i) {
               let cond = true
               while (cond) {
                 const index = Math.round(0 + Math.random() * (3 - 0));
