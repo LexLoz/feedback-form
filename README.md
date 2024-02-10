@@ -15,7 +15,7 @@ This option is not ideal, as it does not allow you to debug the server part.
 4. Open two terminals 
 5. In first terminal enter `npm run express`
 6. In second terminal enter `npm run dev`.
-7. 
+
 Now we have two servers: for the client part and for requests.
 
 P.S.
