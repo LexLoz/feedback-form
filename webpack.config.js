@@ -9,7 +9,6 @@ module.exports = {
     devtool: 'eval-source-map',
     entry: {
         main: [
-            'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
             './src/js/index.js'
         ]
     },
@@ -34,7 +33,7 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: 'http://localhost:9090/scripts',
+        publicPath: '/',
         filename: 'bundle.js',
     },
     externals: [nodeExternals()],

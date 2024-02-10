@@ -24,8 +24,8 @@ import { IsAllFieldsFilled } from "./validation";
 // }
 
 function submitHandler(){
-  fetch("mail.php", {
-    method: "POST",
+  fetch(this.action, {
+    method: "/api/registration",
     body: new FormData(form)
   })
   .then(response => response.json())
@@ -33,4 +33,4 @@ function submitHandler(){
   .catch(function(error) { console.log(error); });
 }
 
-document.querySelector("form").addEventListener("submit", submitHandler)
+document.querySelector("form").addEventListener("submit", submitHandler);

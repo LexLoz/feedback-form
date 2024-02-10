@@ -8,8 +8,8 @@
     "build": "webpack",
     "dev": "webpack --watch",
     "start": "webpack-dev-server --mode development --open",
-    "server": "node server/index.js",
-    "express": "nodemon server/express.js"
+    "express": "node server/index.js",
+    "server": "nodemon server/express.js"
   },
   "repository": {
     "type": "git",

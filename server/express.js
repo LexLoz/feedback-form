@@ -7,7 +7,7 @@ const express = require("express"),
   router = express.Router(),
   config = require("../webpack.config"),
   compiler = webpack(config),
-  port = 9090;
+  port = 9000;
 
 app.use(router);
 app.use(cors());
