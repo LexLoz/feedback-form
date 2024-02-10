@@ -1,5 +1,5 @@
-## Steps to run project
-Variant 1
+# Steps to run project
+##Variant 1
 1. You need `node.js` and `npm`
 2. Clone repository in preferred directory
 3. Run `npm i`
@@ -8,12 +8,15 @@ Variant 1
 6. If you make changes, just update page
 This option is not ideal, as it does not allow you to debug the server part.
 
-Variant 2
-Step 1,2,3 withow changes
+##Variant 2
+1. See previous variant
+2. See previous variant
+3. See previous variant
 4. Open two terminals 
 5. In first terminal enter `npm run express`
 6. In second terminal enter `npm run dev`. 
 Now we have two servers: for the client part and for requests.
+
 P.S.
 I have no idea why I didn't think of using two terminals sooner lol
 
