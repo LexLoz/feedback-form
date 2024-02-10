@@ -1,5 +1,5 @@
 # Steps to run project
-##Variant 1
+## Variant 1
 1. You need `node.js` and `npm`
 2. Clone repository in preferred directory
 3. Run `npm i`
@@ -8,7 +8,7 @@
 6. If you make changes, just update page
 This option is not ideal, as it does not allow you to debug the server part.
 
-##Variant 2
+## Variant 2
 1. See previous variant
 2. See previous variant
 3. See previous variant
