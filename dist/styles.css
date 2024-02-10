@@ -1,9 +1,6 @@
 /*!************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles/feedback-form.sass ***!
   \************************************************************************************************************************/
-@charset "UTF-8";
-/* импортируем цвета */
-/* импортируем миксины*/
 * {
   margin: 0;
   padding: 0;
@@ -367,31 +364,79 @@ body {
   transition: opacity 200ms ease-in;
 }
 .popup-container .popup-window--success {
-  animation: flicker-success 3s infinite;
+  animation: flicker-success 1s infinite;
 }
 .popup-container .popup-window--fail {
-  animation: flicker-fail 3s infinite;
+  animation: flicker-fail 1s infinite;
 }
 
 @keyframes flicker-success {
   0% {
-    background-color: linear-gradient(35deg, #fff1eb, #95fd87);
+    background: linear-gradient(35deg, #fff1eb, #95fd87);
+  }
+  10% {
+    background: linear-gradient(35deg, #ffeae1, #8cfd7d);
+  }
+  20% {
+    background: linear-gradient(35deg, #ffe3d7, #83fd73);
+  }
+  30% {
+    background: linear-gradient(35deg, #ffdccc, #7afc69);
+  }
+  40% {
+    background: linear-gradient(35deg, #ffd4c2, #72fc5f);
   }
   50% {
-    background-color: linear-gradient(35deg, #fff1eb, #3cfb23);
+    background: linear-gradient(35deg, #ffcdb8, #69fc55);
+  }
+  60% {
+    background: linear-gradient(35deg, #ffd4c2, #72fc5f);
+  }
+  70% {
+    background: linear-gradient(35deg, #ffdccc, #7afc69);
+  }
+  80% {
+    background: linear-gradient(35deg, #ffe3d7, #83fd73);
+  }
+  90% {
+    background: linear-gradient(35deg, #ffeae1, #8cfd7d);
   }
   100% {
-    background-color: linear-gradient(35deg, #fff1eb, #95fd87);
+    background: linear-gradient(35deg, #fff1eb, #95fd87);
   }
 }
 @keyframes flicker-fail {
   0% {
-    background-color: linear-gradient(35deg, #fff1eb, #ff9090);
+    background: linear-gradient(35deg, #fff1eb, #ff9090);
+  }
+  10% {
+    background: linear-gradient(35deg, #ffeae1, #ff8686);
+  }
+  20% {
+    background: linear-gradient(35deg, #ffe3d7, #ff7c7c);
+  }
+  30% {
+    background: linear-gradient(35deg, #ffdccc, #ff7171);
+  }
+  40% {
+    background: linear-gradient(35deg, #ffd4c2, #ff6767);
   }
   50% {
-    background-color: linear-gradient(35deg, #fff1eb, #ff2a2a);
+    background: linear-gradient(35deg, #ffcdb8, #ff5d5d);
+  }
+  60% {
+    background: linear-gradient(35deg, #ffd4c2, #ff6767);
+  }
+  70% {
+    background: linear-gradient(35deg, #ffdccc, #ff7171);
+  }
+  80% {
+    background: linear-gradient(35deg, #ffe3d7, #ff7c7c);
+  }
+  90% {
+    background: linear-gradient(35deg, #ffeae1, #ff8686);
   }
   100% {
-    background-color: linear-gradient(35deg, #fff1eb, #ff9090);
+    background: linear-gradient(35deg, #fff1eb, #ff9090);
   }
 }

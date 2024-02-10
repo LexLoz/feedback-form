@@ -20,7 +20,7 @@ function submitHandler(e) {
   e.preventDefault();
 
   if (cantSendAgain) return console.error('Error: timeout before another sending');
-  // if (!IsAllFieldsFilled()) return console.error('Error: some field not filled');
+  if (!IsAllFieldsFilled()) return console.error('Error: some field not filled');
 
   const request = new XMLHttpRequest();
   try {
@@ -36,6 +36,7 @@ function submitHandler(e) {
   } catch (e) { console.error(e) }
 
   const data = new FormData(this);
+  console.log('data', data);
   request.open(this.method, this.action, true);
   request.setRequestHeader('Content-Type', this.action);
   request.send(data);

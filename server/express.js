@@ -1,3 +1,4 @@
+const database = {};
 const express = require("express"),
   cors = require("cors"),
   webpack = require("webpack"), 
@@ -7,7 +8,7 @@ const express = require("express"),
   router = express.Router(),
   config = require("../webpack.config.server"),
   compiler = webpack(config),
-  port = 9090;
+  port = 9000;
 
 app.use(router);
 app.use(cors());
@@ -18,6 +19,7 @@ app.use(webpackHotMiddleware(compiler))
 app.use(express.static('dist'));
 
 app.post("/api/registration", (req, res) => {
+  console.log('req', req, 'res', res);
   if (Math.random() > 0.5) {
     res.statusCode = 400;
 
