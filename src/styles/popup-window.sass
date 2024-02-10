@@ -1,0 +1,82 @@
+@import "./mixins.sass"
+
+$color-success: #95fd87
+$color-fail: #ff9090
+
+@mixin flicker-animation($color)
+    0%
+        background: linear-gradient(35deg, darken(#fff1eb, 0%), darken($color, 0%))
+
+    10%
+        background: linear-gradient(35deg, darken(#fff1eb, 2%), darken($color, 2%))
+
+    20%
+        background: linear-gradient(35deg, darken(#fff1eb, 4%), darken($color, 4%))
+
+    30%
+        background: linear-gradient(35deg, darken(#fff1eb, 6%), darken($color, 6%))
+
+    40%
+        background: linear-gradient(35deg, darken(#fff1eb, 8%), darken($color, 8%))
+
+    50%
+        background: linear-gradient(35deg, darken(#fff1eb, 10%), darken($color, 10%))
+
+    60%
+        background: linear-gradient(35deg, darken(#fff1eb, 8%), darken($color, 8%))
+
+    70%
+        background: linear-gradient(35deg, darken(#fff1eb, 6%), darken($color, 6%))
+
+    80%
+        background: linear-gradient(35deg, darken(#fff1eb, 4%), darken($color, 4%))
+
+    90%
+        background: linear-gradient(35deg, darken(#fff1eb, 2%), darken($color, 2%))
+
+    100%
+        background: linear-gradient(35deg, darken(#fff1eb, 0%), darken($color, 0%))
+
+.popup-container
+    position: fixed
+    top: 7rem
+    margin: 0 auto
+    right: 10.5rem
+    display: inline-block
+
+    .popup-window
+        display: flex
+        align-content: center
+        justify-content: center
+        width: 15rem
+        height: 6rem
+        visibility: hidden
+        background-color: #555
+        color: black
+        font-size: 20px
+        -webkit-text-stroke: 0.5px black
+        text-stroke: 0.5px black
+        text-align: center
+        border-radius: 6px
+        padding: 6px 0
+        position: absolute
+        z-index: 1
+        bottom: 125%
+        left: 50%
+        margin-left: -80px
+
+        &--show
+            visibility: visible
+            @include soft-transition
+
+        &--success
+            animation: flicker-success 1s infinite
+
+        &--fail
+            animation: flicker-fail 1s infinite
+
+@keyframes flicker-success
+    @include flicker-animation($color-success)
+
+@keyframes flicker-fail
+    @include flicker-animation($color-fail)

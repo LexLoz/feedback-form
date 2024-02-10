@@ -5,37 +5,23 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Подключение сброса стилей -->
     <link rel="stylesheet" href="reset.css" />
-
-    <!-- Подключение файла стилей -->
     <link rel="stylesheet" href="styles.css" />
     <title>Форма обратной связи</title>
 </head>
 
 <body>
 
-    <!-- Контейнер выравнивает по ширине и по центру -->
     <div class="container">
-
-        <!-- content содержит содержимое формы -->
         <div class="content">
             <div class="input-fields">
-
-                <!-- Заголовок для формы -->
                 <div class="topic-text">Отправьте нам сообщение</div>
-
-                <!-- Какой-то дополнительный текст -->
                 <p>
                     Если у вас есть какие-то вопросы или предложения по сотрудничеству -
                     заполните форму ниже
                 </p>
 
-                <!-- Форма обратной связи -->
-                <form action="http://localhost:9000/api/ping" method="POST">
-
-                    <!-- Каждый input для выравнивания вкладываем в блок input-box -->
+                <form action="/api/registration" method="post">
                     <div class="input-box" id="name-field">
                         <input type="text" placeholder="Ваше имя" />
                     </div>
@@ -49,12 +35,14 @@
                         <textarea placeholder="Сообщение"></textarea>
                     </div>
                     <div class="button">
-                        <input type="submit" value="Отправить" id="sending-button"/>
+                        <input type="submit" value="Отправить" id="sending-button" />
                     </div>
                 </form>
             </div>
         </div>
-        <!-- Модальное окно -->
+        <div class="popup-container">
+            <span class="popup-window"></span>
+        </div>
         <div id="open-modal" class="modal">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -68,8 +56,8 @@
                 </div>
             </div>
         </div>
-        <!-- Кнопка, при нажатии на которую появляется модальное окно -->
-        <a href="#open-modal" id="sell-your-soul-button" class="modal-button"><img src="./images/button.png" alt="sell-your-soul"></a>
+        <a href="#open-modal" id="sell-your-soul-button" class="modal-button"><img src="./images/button.png"
+                alt="sell-your-soul"></a>
     </div>
     <script src="./bundle.js"></script>
 </body>

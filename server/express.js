@@ -5,9 +5,9 @@ const express = require("express"),
   webpackHotMiddleware = require('webpack-hot-middleware'),
   app = express(),
   router = express.Router(),
-  config = require("../webpack.config"),
+  config = require("../webpack.config.server"),
   compiler = webpack(config),
-  port = 9000;
+  port = 9090;
 
 app.use(router);
 app.use(cors());
@@ -24,7 +24,10 @@ app.post("/api/registration", (req, res) => {
     setTimeout(() => {
       res.send({
         status: "error",
-        message: "Bad request",
+        msg: "Не удалось отправить форму, повторите попытку позже ;(",
+        fields: {
+          
+        }
       });
     }, Math.random() * 1000);
 
@@ -33,9 +36,10 @@ app.post("/api/registration", (req, res) => {
 
   setTimeout(() => {
     res.statusCode = 200;
+    console.log('req', req)
     res.send({
       status: "success",
-      message: "You are registered",
+      msg: "Ваша заявка принята! :0",
     });
   }, Math.random() * 1000);
 });

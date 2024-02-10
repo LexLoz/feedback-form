@@ -23,6 +23,11 @@ const PhoneMask = (selector) => {
         e.target.value = matrix.replace(/(?!\+)./g, function (a) {
             return /[#\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? '' : a;
         });
+
+        if (e.target.value.length == matrix.length)
+            e.target.fieldFilled = true
+        else
+            e.target.fieldFilled = false
     }
 
     let inputs = document.querySelectorAll(selector);

@@ -30,7 +30,6 @@ const fieldNotValide = (fieldId, returnObj) => {
 
 const toggleValidationError = (fieldId, action = 'SHOW') => {
     const { hasError, errorLabel, className } = fieldNotValide(fieldId, true);
-    console.log('action', action, 'error', hasError);
     if (hasError && action === "HIDE")
         errorLabel.classList.remove(className);
     else if (!hasError && action === "SHOW")
@@ -56,6 +55,8 @@ const toggleValidationError = (fieldId, action = 'SHOW') => {
                     else toggleValidationError(element.id, "HIDE");
                     break;
                 case "phone-field":
+                    if (!e.target.fieldFilled) toggleValidationError(element.id, "SHOW");
+                    else toggleValidationError(element.id, "HIDE");
                     break;
                 case "text-field":
                     break;
@@ -65,13 +66,17 @@ const toggleValidationError = (fieldId, action = 'SHOW') => {
 }())
 
 export function IsAllFieldsFilled() {
-    let succsess = true;
+    let success = true;
     inputBoxes.forEach(parent => {
         const input = parent.children[0]
         const hasErr = fieldNotValide(parent.id);
-        if (input.value.length == 0 || hasErr) succsess = false;
+        if (input.value.length == 0 || hasErr) success = false;
     })
-    if (!succsess) toggleValidationError('button');
+    if (!success) toggleValidationError('button');
     else toggleValidationError('button', "HIDE");
-    return succsess;
+    return success;
+}
+
+export function ClearIputFields() {
+    inputBoxes.forEach(parent => parent.children[0].value = '');
 }

@@ -1,36 +1,44 @@
-import { IsAllFieldsFilled } from "./validation";
+import { IsAllFieldsFilled, ClearIputFields } from "./validation";
 
-// function submitHandler(e) {
-//   e.preventDefault();
+let cantSendAgain = false;
 
-//   if (!IsAllFieldsFilled()) return console.error('Error: all field not filled');
+const ShowResponseWindow = (response) => {
+  const messageWindow = document.querySelector('.popup-window');
+  const status = response.status == "error" ? "fail" : "success";
+  console.log('status', status);
+  messageWindow.innerHTML = response.msg;
+  messageWindow.classList.add('popup-window--show');
+  messageWindow.classList.add(`popup-window--${status}`);
+  setTimeout(() => {
+    messageWindow.classList.remove('popup-window--show');
+    messageWindow.classList.remove(`popup-window--${status}`);
+    cantSendAgain = false;
+  }, 6000);
+}
 
-//   var request = new XMLHttpRequest();
-//   request.onreadystatechange = function () {
-//     console.log("readyState=", this.readyState, "statis=", this.status);
-//     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-//       console.log("SUCCESS", this);
-//     }
-//   }
+function submitHandler(e) {
+  e.preventDefault();
 
-//   request.open(this.method, this.action, true);
-//   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  if (cantSendAgain) return console.error('Error: timeout before another sending');
+  // if (!IsAllFieldsFilled()) return console.error('Error: some field not filled');
 
-//   var data = new FormData(this);
-//   for (var key of data.keys())
-//     console.log(key, data.get(key));
+  const request = new XMLHttpRequest();
+  try {
+    request.onreadystatechange = function () {
+      console.log("readyState=", this.readyState, "status=", this.status);
+      if (this.readyState == XMLHttpRequest.DONE && this.responseText) {
+        ClearIputFields();
+        cantSendAgain = true;
+        const response = JSON.parse(this.responseText);
+        ShowResponseWindow(response);
+      }
+    }
+  } catch (e) { console.error(e) }
 
-//   request.send(data);
-// }
-
-function submitHandler(){
-  fetch(this.action, {
-    method: "/api/registration",
-    body: new FormData(form)
-  })
-  .then(response => response.json())
-  .then(function(json) { console.log(json) })
-  .catch(function(error) { console.log(error); });
+  const data = new FormData(this);
+  request.open(this.method, this.action, true);
+  request.setRequestHeader('Content-Type', this.action);
+  request.send(data);
 }
 
 document.querySelector("form").addEventListener("submit", submitHandler);

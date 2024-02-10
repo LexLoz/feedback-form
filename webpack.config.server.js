@@ -1,10 +1,16 @@
 const path = require('path');
+const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     mode: "development",
-    entry: './src/js/index.js',
     devtool: 'eval-source-map',
+    entry: {
+        main: [
+            './src/js/index.js'
+        ]
+    },
 
     devServer: {
         client: {
@@ -12,6 +18,7 @@ module.exports = {
                 errors: true,
                 warnings: false,
             },
+
             progress: true
         },
 
@@ -25,8 +32,10 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
         filename: 'bundle.js',
     },
+    externals: [nodeExternals()],
     module: {
         rules: [
             {
@@ -52,7 +61,12 @@ module.exports = {
         ]
     },
 
-    plugins: [new MiniCssExtractPlugin({
-        filename: "styles.css",
-    })],
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: "styles.css",
+
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin()
+    ],
 };
