@@ -6,6 +6,7 @@
 4. Run `npm run server` (`webpack` and `express` will work together)
 5. Go to `http://localhost:9000` in browser 
 6. If you make changes, just update page
+
 This option is not ideal, as it does not allow you to debug the server part.
 
 ## Variant 2
