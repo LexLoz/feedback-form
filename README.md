@@ -24,4 +24,7 @@ P.S.
 
 I have no idea why I didn't think of using two terminals sooner lol
 
+## Variant 3
+Just use [Deploy](https://feedback-form-rouge.vercel.app)
+
 
