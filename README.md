@@ -18,6 +18,7 @@ This option is not ideal, as it does not allow you to debug the server part.
 
 Now we have two servers: for the client part and for requests.
 
+
 P.S.
 
 I have no idea why I didn't think of using two terminals sooner lol
