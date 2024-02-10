@@ -2,6 +2,19 @@ import { IsAllFieldsFilled, ClearIputFields } from "./validation";
 
 let cantSendAgain = false;
 
+const GenerateDataForSend = () => {
+  const inputBoxes = document.querySelectorAll(".input-box");
+  const data = [];
+  inputBoxes.forEach(element => {
+    const input = element.children[0];
+    data.push({
+      id: input.id,
+      value: input.value
+    });
+  });
+  return data;
+}
+
 const ShowResponseWindow = (response) => {
   const messageWindow = document.querySelector('.popup-window');
   const status = response.status == "error" ? "fail" : "success";
@@ -25,7 +38,7 @@ function submitHandler(e) {
   const request = new XMLHttpRequest();
   try {
     request.onreadystatechange = function () {
-      console.log("readyState=", this.readyState, "status=", this.status);
+      // console.log("readyState=", this.readyState, "status=", this.status);
       if (this.readyState == XMLHttpRequest.DONE && this.responseText) {
         ClearIputFields();
         cantSendAgain = true;
@@ -35,8 +48,7 @@ function submitHandler(e) {
     }
   } catch (e) { console.error(e) }
 
-  const data = new FormData(this);
-  console.log('data', data);
+  const data = JSON.stringify(GenerateDataForSend());
   request.open(this.method, this.action, true);
   request.setRequestHeader('Content-Type', this.action);
   request.send(data);

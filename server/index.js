@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 
-const port = 9090;
+const port = 9000;
 
 app.use(cors());
 
@@ -13,7 +13,10 @@ app.post("/api/registration", (req, res) => {
     setTimeout(() => {
       res.send({
         status: "error",
-        message: "Bad request",
+        msg: "Не удалось отправить форму, повторите попытку позже ;(",
+        fields: {
+          
+        }
       });
     }, Math.random() * 1000);
 
@@ -22,9 +25,10 @@ app.post("/api/registration", (req, res) => {
 
   setTimeout(() => {
     res.statusCode = 200;
+    console.log('req', req)
     res.send({
       status: "success",
-      message: "You are registered",
+      msg: "Ваша заявка принята! :0",
     });
   }, Math.random() * 1000);
 });
