@@ -1,4 +1,4 @@
-import { IsAllFieldsFilled, ClearIputFields } from "./validation";
+import { IsAllFieldsFilled, ClearIputFields, toggleValidationError } from "./validation";
 
 let cantSendAgain = false;
 
@@ -8,7 +8,7 @@ const GenerateDataForSend = () => {
   inputBoxes.forEach(element => {
     const input = element.children[0];
     data.push({
-      id: input.id,
+      id: element.id,
       value: input.value
     });
   });
@@ -17,7 +17,7 @@ const GenerateDataForSend = () => {
 
 const ShowResponseWindow = (response) => {
   const messageWindow = document.querySelector('.popup-window');
-  const status = response.status == "error" ? "fail" : "success";
+  const status = response.status === "error" ? "fail" : "success";
   console.log('status', status);
   messageWindow.innerHTML = response.msg;
   messageWindow.classList.add('popup-window--show');
@@ -27,6 +27,14 @@ const ShowResponseWindow = (response) => {
     messageWindow.classList.remove(`popup-window--${status}`);
     cantSendAgain = false;
   }, 6000);
+
+  if (status === "fail") {
+    const fields = response.fields;
+    console.log('fields', fields)
+    for (const id in fields) {
+      toggleValidationError(id);
+    }
+  } else ClearIputFields();
 }
 
 function submitHandler(e) {
@@ -39,8 +47,7 @@ function submitHandler(e) {
   try {
     request.onreadystatechange = function () {
       // console.log("readyState=", this.readyState, "status=", this.status);
-      if (this.readyState == XMLHttpRequest.DONE && this.responseText) {
-        ClearIputFields();
+      if (this.readyState == XMLHttpRequest.DONE && this.responseText.length !== 0) {
         cantSendAgain = true;
         const response = JSON.parse(this.responseText);
         ShowResponseWindow(response);
@@ -49,8 +56,9 @@ function submitHandler(e) {
   } catch (e) { console.error(e) }
 
   const data = JSON.stringify(GenerateDataForSend());
-  request.open(this.method, this.action, true);
-  request.setRequestHeader('Content-Type', this.action);
+  const action = "http://localhost:9000/api/registration";
+  request.open('POST', action, true);
+  request.setRequestHeader('Content-Type', action);
   request.send(data);
 }
 

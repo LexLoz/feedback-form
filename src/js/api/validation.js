@@ -28,7 +28,7 @@ const fieldNotValide = (fieldId, returnObj) => {
     } : hasError;
 }
 
-const toggleValidationError = (fieldId, action = 'SHOW') => {
+export const toggleValidationError = (fieldId, action = 'SHOW') => {
     const { hasError, errorLabel, className } = fieldNotValide(fieldId, true);
     if (hasError && action === "HIDE")
         errorLabel.classList.remove(className);
@@ -44,21 +44,28 @@ const toggleValidationError = (fieldId, action = 'SHOW') => {
         element.addEventListener('input', (e) => {
             switch (element.id) {
                 case "name-field":
+                    toggleValidationError(element.id, "HIDE");
+                    IsAllFieldsFilled();
                     break;
                 case "email-field":
                     if (e.target.value.length == 0) {
                         toggleValidationError(element.id, "HIDE");
+                        IsAllFieldsFilled();
                         break;
                     }
                     const reg = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
                     if (!reg.test(e.target.value)) toggleValidationError(element.id, "SHOW");
                     else toggleValidationError(element.id, "HIDE");
+                    IsAllFieldsFilled();
                     break;
                 case "phone-field":
                     if (!e.target.fieldFilled) toggleValidationError(element.id, "SHOW");
                     else toggleValidationError(element.id, "HIDE");
+                    IsAllFieldsFilled();
                     break;
                 case "text-field":
+                    toggleValidationError(element.id, "HIDE");
+                    IsAllFieldsFilled();
                     break;
             }
         })

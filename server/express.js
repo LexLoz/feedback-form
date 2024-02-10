@@ -19,14 +19,13 @@ app.use(webpackHotMiddleware(compiler))
 app.use(express.static('dist'));
 
 app.post("/api/registration", (req, res) => {
-  console.log('req', req, 'res', res);
   if (Math.random() > 0.5) {
     res.statusCode = 400;
 
     setTimeout(() => {
       res.send({
         status: "error",
-        msg: "Не удалось отправить форму, повторите попытку позже ;(",
+        msg: "Не удалось отправить форму, повторите попытку позже D:",
         fields: {
           
         }
@@ -38,10 +37,10 @@ app.post("/api/registration", (req, res) => {
 
   setTimeout(() => {
     res.statusCode = 200;
-    console.log('req', req)
+    console.debug('[DEBUG]', req)
     res.send({
       status: "success",
-      msg: "Ваша заявка принята! :0",
+      msg: "Ваша заявка принята! :D",
     });
   }, Math.random() * 1000);
 });
