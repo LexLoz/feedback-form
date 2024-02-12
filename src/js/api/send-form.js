@@ -22,6 +22,8 @@ const ShowResponseWindow = (response) => {
   messageWindow.innerHTML = response.msg;
   messageWindow.classList.add('popup-window--show');
   messageWindow.classList.add(`popup-window--${status}`);
+
+  cantSendAgain = true;
   setTimeout(() => {
     messageWindow.classList.remove('popup-window--show');
     messageWindow.classList.remove(`popup-window--${status}`);
@@ -30,9 +32,11 @@ const ShowResponseWindow = (response) => {
 
   if (status === "fail") {
     const fields = response.fields;
-    console.log('fields', fields)
-    for (const id in fields) {
-      toggleValidationError(id);
+    if (fields) {
+      console.log('fields', fields);
+      for (const id in fields) {
+        toggleValidationError(id);
+      }
     }
   } else ClearIputFields();
 }
@@ -47,10 +51,17 @@ function submitHandler(e) {
   try {
     request.onreadystatechange = function () {
       // console.log("readyState=", this.readyState, "status=", this.status);
-      if (this.readyState == XMLHttpRequest.DONE && this.responseText.length !== 0) {
-        cantSendAgain = true;
-        const response = JSON.parse(this.responseText);
-        ShowResponseWindow(response);
+      if (this.readyState == XMLHttpRequest.DONE) {
+
+        if (this.responseText.length !== 0) {
+          const response = JSON.parse(this.responseText);
+          ShowResponseWindow(response);
+        } else {
+          ShowResponseWindow({
+            status: 'error',
+            msg: 'Ошибка подключения к серверу...'
+          });
+        }
       }
     }
   } catch (e) { console.error(e) }
