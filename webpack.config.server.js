@@ -11,25 +11,6 @@ module.exports = {
             './src/js/index.js'
         ]
     },
-
-    devServer: {
-        client: {
-            overlay: {
-                errors: true,
-                warnings: false,
-            },
-
-            progress: true
-        },
-
-        static: {
-            directory: path.join(__dirname, 'dist'),
-        },
-
-        compress: true,
-        port: 9000,
-    },
-
     output: {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',

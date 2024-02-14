@@ -1,22 +1,11 @@
 const database = [];
-const express = require("express"),
-  cors = require("cors"),
-  webpack = require("webpack"),
-  webpackDevMiddleware = require('webpack-dev-middleware'),
-  webpackHotMiddleware = require('webpack-hot-middleware'),
-  app = express(),
-  router = express.Router(),
-  config = require("../webpack.config.server"),
-  compiler = webpack(config),
-  port = 9000;
+const express = require("express");
+const cors = require("cors");
+const app = express();
 
-app.use(router);
+const port = 9000;
+
 app.use(cors());
-app.use(webpackDevMiddleware(compiler, {
-  publicPath: config.output.publicPath
-}));
-app.use(webpackHotMiddleware(compiler))
-app.use(express.static('dist'));
 
 app.post("/api/registration", (req, res) => {
   if (Math.random() > 0.5) {

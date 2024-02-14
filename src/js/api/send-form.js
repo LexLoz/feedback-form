@@ -23,6 +23,9 @@ const ShowResponseWindow = (response) => {
   messageWindow.classList.add('popup-window--show');
   messageWindow.classList.add(`popup-window--${status}`);
 
+  if (response.debug)
+    response.debug.forEach(element => console.log(`[SERVER DEBUG]`, ...element));
+
   cantSendAgain = true;
   setTimeout(() => {
     messageWindow.classList.remove('popup-window--show');
@@ -33,12 +36,12 @@ const ShowResponseWindow = (response) => {
   if (status === "fail") {
     const fields = response.fields;
     if (fields) {
-      console.log('fields', fields);
+      // console.log('fields', fields);
       for (const id in fields) {
         toggleValidationError(id);
       }
     }
-  } else ClearIputFields();
+  } //else ClearIputFields();
 }
 
 function submitHandler(e) {

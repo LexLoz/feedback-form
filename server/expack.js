@@ -1,11 +1,22 @@
 const database = [];
-const express = require("express");
-const cors = require("cors");
-const app = express();
+const express = require("express"),
+  cors = require("cors"),
+  webpack = require("webpack"),
+  webpackDevMiddleware = require('webpack-dev-middleware'),
+  webpackHotMiddleware = require('webpack-hot-middleware'),
+  app = express(),
+  router = express.Router(),
+  config = require("../webpack.config.server"),
+  compiler = webpack(config),
+  port = 9000;
 
-const port = 9000;
-
+app.use(router);
 app.use(cors());
+app.use(webpackDevMiddleware(compiler, {
+  publicPath: config.output.publicPath
+}));
+app.use(webpackHotMiddleware(compiler))
+app.use(express.static('dist'));
 
 app.post("/api/registration", (req, res) => {
   if (Math.random() > 0.5) {
@@ -35,10 +46,13 @@ app.post("/api/registration", (req, res) => {
               }
             }
           }
-          console.debug('[DEBUG] Incorrect fields log:', incorrectFields);
           res.send({
             status: "error",
             msg: "При заполнении формы были допущены ошибки. Исправьте их и попытайтесь снова.",
+            debug: [
+              ['Incorrect fields log:', incorrectFields],
+              ['Database:', database]
+            ],
             fields: incorrectFields
           });
         });
@@ -47,11 +61,11 @@ app.post("/api/registration", (req, res) => {
     return;
   }
 
-  setTimeout(() => {
+  setTimeout(async () => {
     console.debug('[DEBUG] Valide request')
     res.statusCode = 200;
     const body = [];
-    req
+    await req
       .on('data', chunk => body.push(chunk.toString()))
       .on('end', () => {
         const data = JSON.parse(body.join());
@@ -62,6 +76,9 @@ app.post("/api/registration", (req, res) => {
     res.send({
       status: "success",
       msg: "Ваша заявка принята на обработку.",
+      debug: [
+        ['Database:', database]
+      ]
     });
   }, Math.random() * 1000);
 });
